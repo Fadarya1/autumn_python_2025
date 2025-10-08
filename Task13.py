@@ -4,12 +4,30 @@
 # змеи, лошади, овцы, обезьяны, курицы, собаки и свиньи.
 # По номеру года вывести его название,
 # если 1984 год был началом цикла — годом зеленой крысы.
+from unittest import case
 
 year = int(input("Введите год: "))
+color = ("зеленый", "красный", "желтый", "белый", "черный")
 animal = ("крыса", "бык", "тигр", "кролик", "дракон", "змея",
           "лошадь", "коза", "обезьяна", "петух", "собака", "свинья")
-color = ("green", "red", "yellow", "white", "black")
-print(color[(year-1984) % 5], animal[(year - 1984) % 12])
+def get_color():
+    last_digit = int(str(year)[3])
+    match last_digit:
+        case 0 | 1:
+            return color[3]
+        case 2 | 3:
+            return color[4]
+        case 4 | 5:
+            return color[0]
+        case 6 | 7:
+            return color[1]
+        case 8 | 9:
+            return color[2]
+        case _:
+            return "Неправильный формат года"
+color_of_the_year = get_color()
+print(f"Животное: {animal[(year - 1984) % 12]}")
+print(f"Цвет: {color_of_the_year}")
 
 # color = ["green", "red", "yellow", "white", "black"]
 # # print(color[1])
