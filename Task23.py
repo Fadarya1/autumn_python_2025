@@ -33,9 +33,7 @@ def save_game(id_session, word, mask):
     str = f"{dt}|{id_session}|{name}|{word}|{mask}\n"
     f.write(str)
     f.close()
-    return word
     print("Сохранил игру!")
-
 
 def load_game():
     f = open("save_game.csv", "tr")
@@ -43,9 +41,9 @@ def load_game():
     list_str= f.readlines()
     for csv_str in list_str:
         if name in csv_str:
-            print(indx, ") ", csv_str[0:70])
-            indx += 1
-    if indx == 0:
+            print(indx, ") ", csv_str[0:70]) #ЗДЕСЬ ПОСТАВИЛА ОГРАНИЧЕНИЕ, ЧТОБЫ НЕ ВИДНО БЫЛО ЗАГАДАННОЕ СЛОВО
+            indx += 1 #ЗДЕСЬ СДВИНУЛА НА 1 ТАБ
+    if indx == 0: #ДОБАВИЛА ЭТОТ КУСОК
         print("Для этого игрока нет сохраненных игр")
         exit(1)
     indx_load = int(input("Введите номер:"))
@@ -55,6 +53,8 @@ def load_game():
     session_uuid = sg[1]
     # print(session_uuid,key, list(mask))
     start_game(session_uuid, key.strip(), list(mask.strip()))
+    exit(0)
+    #ДОБАВИЛА СТРИП У МАСКИ
 
 
 def start_game(session_uuid, key, mask ):
@@ -67,7 +67,7 @@ def start_game(session_uuid, key, mask ):
         if alfa == "2":
             print("Сохранение игры!")
             save_game(session_uuid, key, mask)
-        if alfa == "4":
+        if alfa == "4": #ДОБАВИЛА ЭТОТ ПУНКТ
             print("Вы вышли из игры")
             exit(0)
         cnt = 0
@@ -76,12 +76,10 @@ def start_game(session_uuid, key, mask ):
                 mask[cnt] = alfa
                 cnt += 1
                 continue
-            # else:
-            #     cnt_ += 1
             cnt += 1
         else:
             print(mask)
-    print(f"{name}, Вы угадали это слово!")
+    print(f"{name}, Вы угадали это слово!") #ДОБАВИЛА ЭТОТ ПУНКТ
 match num:
     case 1:
         key = generate_key()
