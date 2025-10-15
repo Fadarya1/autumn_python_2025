@@ -1,0 +1,46 @@
+# # todo: Шифр Цезаря
+# Описание шифра.
+# В криптографии шифр Цезаря, также известный шифр сдвига, код Цезаря или сдвиг Цезаря,
+# является одним из самых простых и широко известных методов шифрования.
+# Это тип подстановочного шифра, в котором каждая буква в открытом тексте заменяется буквой на некоторое
+# фиксированное количество позиций вниз по алфавиту. Например, со сдвигом влево 3, D будет заменен на A,
+# E станет Б, и так далее. Метод назван в честь Юлия Цезаря, который использовал его в своей частной переписке.
+#
+# Задача.
+# Считайте файл message.txt и зашифруйте  текст шифром Цезаря, при этом символы первой строки файла должны
+# циклически сдвигаться влево на 1, второй строки — на 2, третьей строки — на три и т.д.
+# В этой задаче удобно считывать файл построчно, шифруя каждую строку в отдельности.
+# В каждой строчке содержатся различные символы. Шифровать нужно только буквы кириллицы.
+
+f=open("message.txt","rt", encoding="utf-8")
+list_of_data = f.readlines()
+i = 1
+fs=open("message_encrypted.txt","w+t", encoding="utf-8")
+for line in list_of_data:
+    for j in range(len(line)):
+        letter_in_text = line[j]
+        if ((letter_in_text >= "а" and letter_in_text <= "я") or
+            (letter_in_text >= "А" and letter_in_text <= "Я")):
+            encrypted_letter = letter_in_text.lower()
+            index_of_letter = ord(encrypted_letter)
+            if (index_of_letter - i) < ord("а"):
+                new_index = (ord("я") + 1 - (i - (index_of_letter - ord("а"))))
+            else:
+                new_index = index_of_letter - i
+            encrypted_letter = chr(new_index)
+            if letter_in_text.isupper():
+                encrypted_letter = encrypted_letter.upper()
+            else:
+                encrypted_letter = encrypted_letter.lower()
+        else:
+            encrypted_letter = letter_in_text
+        fs.write(encrypted_letter)
+    i += 1
+fs.close()
+f.close()
+# print("Џ")
+# print(ord("Џ"))
+# print(f"это буква В {ord("В")}")
+# print("Ў")
+# print(ord("Ў"))
+# print(f"это буква В {ord("В")}")
