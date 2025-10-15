@@ -25,4 +25,4 @@ for line in f:#18 букв А
 
 for a in range(len(vowels)):
     print(f"Количество букв {vowels[a]} - {count[a]}")
-
+f.close()
