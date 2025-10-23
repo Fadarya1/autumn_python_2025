@@ -6,8 +6,8 @@
 prices = ["₽1500", "20.50 USD", "invalid", "€25.00", "$15.99",  "18.99", "N/A", "¥5000"]
 # corrections = [price.replace("USD", "$") for price in prices if "USD" in prices]
 # print(corrections)
-correct_prices = [price for price in prices if price.startswith("$") or price.startswith("€")
-                  or price.startswith("¥") or price.startswith("₽")]
+# correct_prices = [price for price in prices if price.startswith("$") or price.startswith("€")
+#                   or price.startswith("¥") or price.startswith("₽") or price.endswith("USD")]
 # print(correct_prices)
 # for price in correct_prices:
 #     x = price[0]
@@ -21,11 +21,13 @@ correct_prices = [price for price in prices if price.startswith("$") or price.st
 #         price = float(price[1:])
     # print(price)
 
-cor_prices = ([float(price[1:]) for price in correct_prices if price.startswith("₽")]+
-              [float(price[1:]) * 80 for price in correct_prices if price.startswith("$")]+
-              [float(price[1:]) * 90 for price in correct_prices if price.startswith("€")]+
-              [float(price[1:]) * 0.5387 for price in correct_prices if price.startswith("¥")])
-print(cor_prices)
+correct_prices_rubles = (([float(price[1:]) for price in prices if price.startswith("₽")]+
+              [float(price[1:]) * 80 for price in prices if price.startswith("$")]+
+              [float(price[1:]) * 90 for price in prices if price.startswith("€")]+
+              [float(price[1:]) * 0.5387 for price in prices if price.startswith("¥")])+
+              [float(price[:(price.index("USD"))])*80 for price in prices if price.endswith("USD")])
+
+print(correct_prices_rubles)
 # for price in prices:
 #     if price.find("₽"):
 #         for element in price:
