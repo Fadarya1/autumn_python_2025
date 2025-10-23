@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TODO App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .Высокий { color: red; }
+        .Средний { color: orange; }
+        .Низкий { color: green; }
+    </style>
+</head>
+<body>
+    <h1>TODO List</h1>
+    <ul>
+        {% for item in tasks %}
+        <li>{{item.id}} {{item.task}} {{item.description}} {{item.start_date}}  {{item.priority}} {{item.complete}}</li>
+        {% endfor %}
+    </ul>
+    <form method="POST" action="/add">
+        <input type="text" name="task" placeholder="Добавь задачу">
+        <input type="text" name="description" placeholder="Добавь описание задачи">
+        <input type="date" name="start_date">
+        <select name="priority">
+            <option value="2">Высокий</option>
+            <option value="1">Средний</option>
+            <option value="0">Низкий</option>
+        </select>
+        <button type="submit">Добавить</button>
+    </form>
+</body>
+</html>
