@@ -10,7 +10,6 @@ class LearningMaterial:
         self.title = title
         self.duration_minutes = duration_minutes
         self.author = author
-        instances = []
     # Свойства: title, author, duration_minutes
     # Методы:
     # display_info() - выводит основную информацию
